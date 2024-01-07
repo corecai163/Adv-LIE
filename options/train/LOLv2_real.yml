@@ -1,0 +1,57 @@
+#### general settings
+name: LOLv2_real
+use_tb_logger: true
+gpu_ids: [0,1]
+
+#### datasets
+datasets:
+  train:
+    mode: lolv2_real
+    dataroot_GT: ../Data/LOL-v2/Real_captured/Train/Normal
+    dataroot_LQ: ../Data/LOL-v2/Real_captured/Train/Low
+    train_size: [600, 400]
+    cache_keys: ~
+    cache_data: true
+    use_shuffle: true
+    n_workers: 4  # per GPU
+    batch_size: 4
+    GT_size: 128     # size you want to crop out as input sample.
+    LQ_size: 128
+    use_flip: true
+    use_rot: true
+    color: RGB
+  val:
+    mode: lolv2_real
+    dataroot_GT: ../Data/LOL-v2/Real_captured/Test/Normal
+    dataroot_LQ: ../Data/LOL-v2/Real_captured/Test/Low
+    cache_data: true
+    train_size: [600, 400]
+
+#### path
+path:
+  root: ./
+  strict_load: false
+
+#### training settings: learning rate scheme, loss
+train:
+  lr_G: !!float 4e-4
+  lr_scheme: MultiStepLR
+  beta1: 0.9
+  beta2: 0.99
+  niter: 80000
+  ft_tsa_only: 0
+  warmup_iter: -1  # -1: no warm up
+  lr_steps: [10000, 20000, 40000, 60000]
+  lr_gamma: 0.5
+  eta_min: !!float 1e-7
+
+  pixel_criterion: cb
+  pixel_weight: 1.0
+  val_freq: !!float 1e3
+
+  manual.resize960x512_seed: 0
+
+#### logger
+logger:
+  print_freq: 100
+  save_checkpoint_freq: !!float 5000
