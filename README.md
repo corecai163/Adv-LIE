@@ -38,7 +38,7 @@ If you find the project useful, please cite:
 ```
 @inproceedings{advLIE,
   title={Adversarially Regularized Low-Light Image Enhancement},
-  author={William Y. Wang, Lisa Liu, and Pingping Cai},
+  author={Wang, William Y. and Liu, Lisa and Cai, Pingping},
   booktitle={International Conference on Multimedia Modeling (MMM)},
   year={2024}
 }
